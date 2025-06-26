@@ -22,7 +22,7 @@
 ## 🚀 Live Demo
 
 Check out the live version here:  
-👉 **[View it on GitHub Pages](https://Rh-dt.github.io/color-palette-generator/)**
+👉 **[View it on GitHub Pages](https://rh-dt.github.io/color-pallete-generator/)**
 
 ---
 
