@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Palette Generator | Rh-dt</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #e0e5ec;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+      font-weight: 600;
+    }
+
+    .neumorphic-box {
+      background: #e0e5ec;
+      border-radius: 20px;
+      box-shadow:  8px 8px 16px #a3b1c6,
+                  -8px -8px 16px #ffffff;
+      padding: 20px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .neumorphic-box:hover {
+      transform: translateY(-4px);
+      box-shadow:  10px 10px 20px #a3b1c6,
+                  -10px -10px 20px #ffffff;
+    }
+
+    .color-box {
+      height: 140px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.7);
+      transition: transform 0.2s ease-in-out;
+      border: 2px solid #ffffffaa;
+      color: #fff;
+    }
+
+    .color-box:hover {
+      transform: scale(1.05);
+    }
+
+    .generate-btn {
+      background: #e0e5ec;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 30px;
+      font-weight: 600;
+      box-shadow: 5px 5px 15px #a3b1c6,
+                  -5px -5px 15px #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    .generate-btn:hover {
+      box-shadow: inset 5px 5px 10px #a3b1c6,
+                  inset -5px -5px 10px #ffffff;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column align-items-center justify-content-center min-vh-100 p-4">
+  <div class="container text-center">
+    <div class="neumorphic-box mb-4">
+      <h1 class="mb-3">🎨 Color Palette Generator</h1>
+      <button onclick="generateColors()" class="generate-btn">Generate Palette</button>
+    </div>
+    <div id="palette" class="row g-4 justify-content-center"></div>
+    <footer class="text-center mt-5">
+      Made with ❤️ by RH | MIT License
+    </footer>
+  </div>
+
+  <script>
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function generateColors() {
+      const row = document.getElementById('palette');
+      row.innerHTML = '';
+
+      for (let i = 0; i < 5; i++) {
+        const color = getRandomColor();
+        const col = document.createElement('div');
+        col.className = 'col-10 col-sm-6 col-md-2';
+
+        const box = document.createElement('div');
+        box.className = 'color-box';
+        box.style.backgroundColor = color;
+        box.innerText = color;
+
+        box.onclick = () => {
+          navigator.clipboard.writeText(color);
+          box.innerText = '✅ Copied!';
+          setTimeout(() => box.innerText = color, 1000);
+        };
+
+        col.appendChild(box);
+        row.appendChild(col);
+      }
+    }
+
+    window.onload = generateColors;
+  </script>
+</body>
+</html>
